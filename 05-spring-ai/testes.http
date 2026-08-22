@@ -1,0 +1,10 @@
+### Teste da API com Inteligência Artificial
+POST http://localhost:8080/transactions/ai
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="audio.mp3"
+Content-Type: audio/mp3
+
+< ./audio.mp3
+--WebAppBoundary--
