@@ -2,6 +2,8 @@
 
 Projeto final da imersão Itaú/DIO. Parti da [API de orçamento desenvolvida na trilha](https://github.com/digitalinnovationone/dio-spring-boot-learning-track/blob/main/05-spring-ai/README.md), que recebe áudio e usa IA para registrar ou consultar transações. Minha principal evolução foi validar o valor na entidade `Transaction`: se o valor for zero ou negativo, o lançamento é recusado antes de chegar ao banco.
 
+> **O que foi verificado:** os três testes unitários da regra de valores passaram em execução isolada com Java 25 e JUnit. O fluxo por voz com a Groq ainda não foi validado de ponta a ponta. O exemplo de áudio abaixo mostra como enviar a requisição; não é uma demonstração de resposta bem-sucedida.
+
 ## Minha contribuição
 
 - **Validação no domínio:** o construtor usado para criar novas transações rejeita valores menores ou iguais a zero. Tanto a requisição REST quanto a ferramenta de registro chamada pela IA passam pelo mesmo caso de uso. A regra não depende do prompt.
