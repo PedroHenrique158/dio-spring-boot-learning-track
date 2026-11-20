@@ -52,6 +52,24 @@ Para conferir a regra de negócio sem enviar áudio à Groq, envie uma requisiç
 
 Os testes existentes são executados separadamente com `./gradlew test` (ou `.\gradlew.bat test` no Windows). Os testes que inicializam a aplicação ou integram serviços podem exigir a configuração local. O exemplo acima é uma verificação manual, não um teste automatizado da regra.
 
+### Teste da regra do domínio (sem banco nem API de IA)
+
+O [`TransactionTest`](src/test/java/dio/budgeting/domain/TransactionTest.java) chama a entidade diretamente e cobre três casos:
+
+- `4500` centavos (R$ 45) são aceitos;
+- `0` centavos são rejeitados;
+- `-4500` centavos são rejeitados.
+
+Com JDK 25, rode apenas essa classe a partir de `05-spring-ai`:
+
+```bash
+bash ./gradlew test --tests 'dio.budgeting.domain.TransactionTest'
+```
+
+No PowerShell, use `.\gradlew.bat test --tests 'dio.budgeting.domain.TransactionTest'`.
+
+**Verificação:** 3 testes passaram em execução isolada com JDK 25 e JUnit, sem banco, áudio ou chamadas à Groq. A execução pelo Gradle Wrapper não foi verificada neste ambiente porque ele não conseguiu baixar a distribuição do Gradle. Isso não valida o fluxo completo da aplicação.
+
 ## O que aprendi
 
 A IA pode interpretar o pedido e escolher qual ferramenta chamar, mas é o código da aplicação que define se a ação faz sentido. Colocar a validação no domínio permite que os diferentes caminhos de entrada respeitem a mesma regra.
